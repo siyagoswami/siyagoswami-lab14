@@ -29,6 +29,7 @@ public class EnigmaFrame extends JFrame {
         createButtonPanel(); 
     }
 
+    // maintains boxes for rotors 
     private void createSettingsPanel() {
         JPanel settingsPanel = new JPanel();
         innerRotorBox = new JComboBox<>(new String []{"1", "2", "3", "4", "5"});
@@ -52,6 +53,7 @@ public class EnigmaFrame extends JFrame {
         add(settingsPanel, BorderLayout.NORTH);
     }
 
+    // maintains areas for input and output 
     private void createTextPanel() {
         JPanel textPanel = new JPanel(new GridLayout(2, 1));
 
@@ -74,6 +76,7 @@ public class EnigmaFrame extends JFrame {
         add(textPanel, BorderLayout.CENTER);
     }
 
+    // maintains encrypt and decryput button positioning at the button 
     private void createButtonPanel() {
         JPanel buttonPanel = new JPanel();
 
@@ -89,6 +92,7 @@ public class EnigmaFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    // takes inputs and connects to Comms to display output 
     private void processMessage(String mode) {
         String innerRotor = (String) innerRotorBox.getSelectedItem();
         String middleRotor = (String) middleRotorBox.getSelectedItem();
