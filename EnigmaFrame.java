@@ -1,6 +1,5 @@
-import javax.swing.*; 
 import java.awt.*;
-import java.awt.event.*;
+import javax.swing.*;
 
 public class EnigmaFrame extends JFrame {
     // three JComboBox features for rotors 
@@ -75,7 +74,44 @@ public class EnigmaFrame extends JFrame {
         add(textPanel, BorderLayout.CENTER);
     }
 
+    private void createButtonPanel() {
+        JPanel buttonPanel = new JPanel();
 
+        encryptButton = new JButton("Encrypt");
+        decryptButton = new JButton("Decrypt");
 
+        encryptButton.addActionListener(e -> processMessage("encrypt"));
+        decryptButton.addActionListener(e -> processMessage("decrypt"));
 
+        buttonPanel.add(encryptButton);
+        buttonPanel.add(decryptButton);
+
+        add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void processMessage(String mode) {
+        String innerRotor = (String) innerRotorBox.getSelectedItem();
+        String middleRotor = (String) middleRotorBox.getSelectedItem();
+        String outerRotor = (String) outerRotorBox.getSelectedItem();
+
+        String start = startField.getText();
+        String message = inputArea.getText();
+
+        if (start.length() != 3) {
+            JOptionPane.showMessageDialog(this, "Start position must be exactly 3 characters.");
+            return;
+        }
+
+        String[] args = {
+            innerRotor,
+            middleRotor,
+            outerRotor,
+            start,
+            mode,
+            message
+        };
+
+        String result = Comms.run(args);
+        outputArea.setText(result);
+    }
 }
